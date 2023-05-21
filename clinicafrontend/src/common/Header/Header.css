@@ -8,7 +8,9 @@
 --bs-navbar-color: rgba(102, 102, 102, 0.75);                               
 --bs-navbar-hover-color: rgb(112, 205, 218);         
 --bs-navbar-disabled-color: rgba(255, 255, 255, 0.25);         
---bs-navbar-brand-color: rgb(112, 205, 218);         
+--bs-navbar-brand-color: rgb(112, 205, 218);       
+
+font-size:x-large;
          
 border-bottom: solid;         
 border-width: 0.1em;         

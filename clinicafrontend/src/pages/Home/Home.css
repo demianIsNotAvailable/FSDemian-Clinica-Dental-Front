@@ -1,0 +1,12 @@
+.homeDesign {
+    display: flex;
+
+    height: 78vh;
+    width: 100vw;
+
+}
+
+.homeImgDesign{
+    height:100%;
+    width:100%
+}

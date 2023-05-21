@@ -13,6 +13,7 @@ export const Home = () => {
     return (
         <div className="homeDesign">
             
+            <img className="homeImgDesign" src="../../../images/homeImg.png"></img>
         </div>
     )
 }

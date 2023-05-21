@@ -14,7 +14,7 @@ export const AppointmentModal = (props) => {
 
   return (
     <>
-      <div className="loginButtonDesign" onClick={()=> handleShow()}>Login!</div>
+      <div className="loginButtonDesign" onClick={()=> handleShow()}>View</div>
 
       <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>

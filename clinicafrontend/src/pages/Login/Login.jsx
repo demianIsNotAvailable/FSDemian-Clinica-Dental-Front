@@ -67,7 +67,6 @@ export const Login = () => {
           name={"password"}
           handler={inputHandlerFunction}
         />
-        <AppointmentModal />
         <button className="loginButtonDesign" onClick={loginHandler}>
           Iniciar sesión
         </button>

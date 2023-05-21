@@ -5,14 +5,14 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.css";
 
-const tokenRedux = 3;
-const rolRedux = "admin";
+const tokenRedux = "";
+const rolRedux = "";
 export const Header = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="navBar">
       <Container>
         <Navbar.Brand href="home" id="logo">
-          Clínica Dental
+          FULL SMILE DEVELOPERS
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -32,14 +32,21 @@ export const Header = () => {
               </>
             ) : (
               <>
-                {rolRedux === "admin" && (
+                {rolRedux === "admin" ? (
                   <NavDropdown title="Account" id="collasible-nav-dropdown">
                     <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
                     <NavDropdown.Item href="logout">Logout</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="appointments">Appointments</NavDropdown.Item>
+                    <NavDropdown.Item href="ADMIN">ADMIN</NavDropdown.Item>
                   </NavDropdown>
-                )}
+                ) :                 
+               <NavDropdown title="Account" id="collasible-nav-dropdown">
+                <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="logout">Logout</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="appointments">Appointments</NavDropdown.Item>
+              </NavDropdown>
+              }
               </>
             )}
           </Nav>
