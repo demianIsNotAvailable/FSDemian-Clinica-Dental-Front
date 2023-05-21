@@ -1,0 +1,9 @@
+#modalBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red !important; 
+    color: yellow;
+    font-size:3em;
+    
+}

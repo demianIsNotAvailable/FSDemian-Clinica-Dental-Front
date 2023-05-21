@@ -23,13 +23,10 @@ export const appointmentSlice = createSlice({
     
 });
 
-//exporto las ACCIONES.....
 
-//Exporto las acciones para el modo ESCRITURA
 export const { addAppointment, removeAppointment } = appointmentSlice.actions;
 
 
-//exporto el método para el modo LECTURA
 export const appointmentData = (state) => state.detail;
 
 export default appointmentSlice.reducer;

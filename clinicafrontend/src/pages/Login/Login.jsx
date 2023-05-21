@@ -1,33 +1,57 @@
 import React, { useState, useEffect } from "react";
-import "./Login.css";
 import { InputText } from "../../common/InputText/InputText";
 import { useNavigate } from "react-router-dom";
-
 import jwt_decode from "jwt-decode";
-
-//Conexion a redux en modo escritura......
 import { useDispatch, useSelector } from "react-redux";
+import { AppointmentModal } from "../../common/Modal/Modal";
+import { login, userData } from "../userSlice";
+import { loginCall } from "../../services/apiCalls";
+import "./Login.css";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+  const userRdxData = useSelector(userData);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (userRdxData.credentials.token) {
+      navigate("/");
+    }
+  }, []);
 
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
 
-
   const inputHandlerFunction = (field) => {
     setCredentials((prevState) => ({
       ...prevState,
       [field.target.name]: field.target.value,
     }));
-    console.log(credentials)
+    console.log(credentials);
+  };
+
+  const loginHandler = () => {
+    loginCall(credentials)
+      .then((res) => {
+        const decodedData = jwt_decode(res.data.token);
+        const data = {
+          token: res.data.token,
+          user: decodedData,
+        };
+        dispatch(login({credentials: data}))
+
+        setTimeout(() => {
+          navigate("/")
+        }, 2000)
+      })
+      .catch((error) => {});
   };
 
   return (
     <div className="loginDesign">
-      <div>
+      <div className="loginDesignInner">
         <InputText
           type={"email"}
           className={"basicInput"}
@@ -43,10 +67,10 @@ export const Login = () => {
           name={"password"}
           handler={inputHandlerFunction}
         />
-
-        <div className="loginButtonDesign" onClick={() => logMeFunction()}>
-          Login!
-        </div>
+        <AppointmentModal />
+        <button className="loginButtonDesign" onClick={loginHandler}>
+          Iniciar sesión
+        </button>
       </div>
     </div>
   );

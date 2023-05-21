@@ -1,14 +1,14 @@
-
 import React from 'react';
+import "./inputText.css"
 
 export const InputText = ({type, className, placeholder, name, handler}) => {
 
     return (
-        <div className='inputTextDesign'>
-            <input 
+        <div >
+            <input id='inputTextDesign'
                 type={type}
-                className={className}
-                placeholder={placeholder}
+                className={className} 
+                placeholder={type}
                 name={name}
                 onChange={(e)=>handler(e)}
             />

@@ -1,0 +1,10 @@
+.profileDesign {
+    height: 78vh;
+    width: 100vw;
+
+    background-color: rgb(220, 220, 220);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -3,9 +3,16 @@
     height: 78vh;
     width: 100vw;
 
-    background-color: gainsboro;
+    background-color: rgb(53, 39, 78);
 
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginDesignInner {
+    display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;

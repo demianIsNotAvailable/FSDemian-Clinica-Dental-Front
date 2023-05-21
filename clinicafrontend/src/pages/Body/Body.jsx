@@ -4,6 +4,9 @@ import { Home } from "../Home/Home";
 import { Login } from "../Login/Login";
 import { About } from "../About/About";
 import { Register } from "../Register/Register";
+import { Profile } from "../Profile/Profile";
+import { Admin } from "../Admin/Admin";
+import { Appointments } from "../Appointments/Appointments";
 
 export const Body = () => {
 
@@ -16,6 +19,9 @@ export const Body = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/appointments" element ={<Appointments />} />
             </Routes>
         
         
