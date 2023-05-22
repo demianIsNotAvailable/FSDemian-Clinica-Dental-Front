@@ -24,7 +24,7 @@ export const Login = () => {
     password: "",
   });
 
-  const inputHandlerFunction = (field) => {
+  const inputHandler = (field) => {
     setCredentials((prevState) => ({
       ...prevState,
       [field.target.name]: field.target.value,
@@ -57,7 +57,7 @@ export const Login = () => {
           className={"basicInput"}
           placeholder={""}
           name={"email"}
-          handler={inputHandlerFunction}
+          handler={inputHandler}
         />
 
         <InputText
@@ -65,10 +65,10 @@ export const Login = () => {
           className={"basicInput"}
           placeholder={""}
           name={"password"}
-          handler={inputHandlerFunction}
+          handler={inputHandler}
         />
         <button className="loginButtonDesign" onClick={loginHandler}>
-          Iniciar sesión
+          Log me in!
         </button>
       </div>
     </div>

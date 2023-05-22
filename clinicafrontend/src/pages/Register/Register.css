@@ -11,9 +11,9 @@
     align-items: center;
 }
 
+
 .registerFormContainer {
     display:flex;
+    flex-direction: column;
 
-    height: 90vh;
-    width: 50vw
 }

@@ -1,123 +1,126 @@
-import React from "react";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import { useState, useEffect } from "react";
-import { InputText } from "../../common/InputText/InputText";
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBTextArea,
-  MDBFile,
-} from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loginCall, registerCall } from "../../services/apiCalls";
+import { login, userData } from "../userSlice";
 import "./Register.css";
+
 
 export const Register = () => {
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const userReduxData = useSelector(userData)
 
-    const [userData, setUserData] = useState({
-        name:"",
-        lastname:"",
-        phone:"",
-        email: "",
-        password: "",
-      });
+  useEffect(()=>{
+    if(userReduxData.credentials.token){
+      navigate("/")
+    };
+  },[]);
 
 
-    const inputHandler = (field) => {
-        setCredentials((prevState) => ({
-          ...prevState,
-          [field.target.name]: field.target.value,
-        }));
-        console.log(credentials);
-      };
 
+  const [data, setData] = useState({
+    name: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    password: "",
+  });
+
+  const inputHandler = (field) => {
+    setData((prevState) => ({
+      ...prevState,
+      [field.target.name]: field.target.value,
+    }));
+    console.log(data);
+  };
+
+  const registerHandler = () => {
+    registerCall(data)
+      .then((res) => {
+        const credentials = {
+          email: data.email,
+          password: data.password
+        }
+        loginCall(credentials)
+
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="registerDesign">
-        <div className="registerFormContainer">
-      <MDBContainer fluid>
-        <MDBRow className="d-flex justify-content-center align-items-center">
-          <MDBCol lg="9" className="my-5">
-            <h1 class="text-white mb-4">Apply for a job</h1>
+      <div className="registerFormContainer">
+        <InputGroup className="mb-3">
+          <InputGroup.Text id="basic-addon1">name</InputGroup.Text>
+          <Form.Control
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            type={"text"}
+            className={"basicInput"}
+            placeholder={""}
+            name={"name"}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputGroup>
 
-            <MDBCard>
-              <MDBCardBody className="px-4">
-                <MDBRow className="align-items-center pt-4 pb-3">
-                  <MDBCol md="3" className="ps-5">
-                    <h6 className="mb-0">Name</h6>
-                  </MDBCol>
+        <InputGroup className="mb-3">
+          <Form.Control
+            type={"text"}
+            className={"basicInput"}
+            placeholder={""}
+            name={"lastname"}
+            onChange={(e) => inputHandler(e)}
+          />
+          <InputGroup.Text id="basic-addon2">lastname</InputGroup.Text>
+        </InputGroup>
 
-                  <MDBCol md="9" className="pe-5">
-                    <MDBInput placeholder="Name" size="md" id="form1" type="text" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow className="align-items-center pt-4 pb-3">
-                  <MDBCol md="3" className="ps-5">
-                    <h6 className="mb-0">Last name</h6>
-                  </MDBCol>
+        <InputGroup className="mb-3">
+          <InputGroup.Text id="basic-addon1">phone number</InputGroup.Text>
+          <Form.Control
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            type={"text"}
+            className={"basicInput"}
+            placeholder={""}
+            name={"phone"}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputGroup>
+        <Form.Label htmlFor="basic-url">
+          These will be your login credentials:
+        </Form.Label>
 
-                  <MDBCol md="9" className="pe-5">
-                    <MDBInput placeholder="Last name" size="md" id="form1" type="text" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow className="align-items-center pt-4 pb-3">
-                  <MDBCol md="3" className="ps-5">
-                    <h6 className="mb-0">Phone Number</h6>
-                  </MDBCol>
+        <InputGroup className="mb-3">
+          <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+          <Form.Control
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            type={"email"}
+            className={"basicInput"}
+            placeholder={""}
+            name={"email"}
+            onChange={(e) => inputHandler(e)}
+          />
+        </InputGroup>
 
-                  <MDBCol md="9" className="pe-5">
-                    <MDBInput placeholder="123 456 789" size="md" id="form1" type="text" />
-                  </MDBCol>
-                </MDBRow>
+        <InputGroup className="mb-3">
+          <InputGroup.Text id="basic-addon1">password</InputGroup.Text>
+          <Form.Control
+            type={"password"}
+            className={"basicInput"}
+            placeholder={""}
+            name={"password"}
+            onChange={(e) => inputHandler(e)}
+          />
 
-
-                <hr className="mx-n3" />
-
-                <MDBRow className="align-items-center pt-4 pb-3">
-                  <MDBCol md="3" className="ps-5">
-                    <h6 className="mb-0">Email address</h6>
-                  </MDBCol>
-
-                  <MDBCol md="9" className="pe-5">
-                    <MDBInput
-                      placeholder="example@example.com"
-                      size="md"
-                      id="form2"
-                      type="email"
-                    />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow className="align-items-center pt-4 pb-3">
-                  <MDBCol md="3" className="ps-5">
-                    <h6 className="mb-0">Password</h6>
-                  </MDBCol>
-
-                  <MDBCol md="9" className="pe-5">
-                    <InputText
-                    type={"password"}
-                    className={"basicInput"}
-                    placeholder={"********"}
-                    name={"password"}
-                    handler={inputHandler}
-                    />
-                  </MDBCol>
-                </MDBRow>
-
-                <hr className="mx-n3" />
-
-
-
-                <MDBBtn className="my-4" size="lg">
-                  send application
-                </MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+        </InputGroup>
+        <button className="registerButtonDesign" onClick={registerHandler}>
+            Log me in!
+          </button>
       </div>
     </div>
   );
