@@ -3,18 +3,17 @@ import { InputText } from "../../common/InputText/InputText";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
-import { AppointmentModal } from "../../common/Modal/Modal";
 import { login, userData } from "../userSlice";
 import { loginCall } from "../../services/apiCalls";
 import "./Login.css";
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const userRdxData = useSelector(userData);
+  const userReduxData = useSelector(userData);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userRdxData.credentials.token) {
+    if (userReduxData.credentials.token) {
       navigate("/");
     }
   }, []);
@@ -35,10 +34,9 @@ export const Login = () => {
   const loginHandler = () => {
     loginCall(credentials)
       .then((res) => {
-        const decodedData = jwt_decode(res.data.token);
         const data = {
           token: res.data.token,
-          user: decodedData,
+          user: jwt_decode(res.data.token),
         };
         dispatch(login({credentials: data}))
 
@@ -46,12 +44,12 @@ export const Login = () => {
           navigate("/")
         }, 2000)
       })
-      .catch((error) => {});
+      .catch((error) => {throw new Error(error)});
   };
 
   return (
     <div className="loginDesign">
-      <div className="loginDesignInner">
+      <div className="loginFormContainer">
         <InputText
           type={"email"}
           className={"basicInput"}

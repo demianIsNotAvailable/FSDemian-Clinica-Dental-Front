@@ -6,9 +6,9 @@
 
 .navbar-dark {
 --bs-navbar-color: rgba(102, 102, 102, 0.75);                               
---bs-navbar-hover-color: rgb(112, 205, 218);         
+--bs-navbar-hover-color: rgb(112, 158, 218);;;         
 --bs-navbar-disabled-color: rgba(255, 255, 255, 0.25);         
---bs-navbar-brand-color: rgb(112, 205, 218);       
+--bs-navbar-brand-color: rgb(112, 158, 218);;;       
 
 font-size:x-large;
          
@@ -23,10 +23,14 @@ transition: 0.5s
          
          
 .navbar-brand:focus, .navbar-brand:hover {         
-    color: rgb(112, 205, 218)         
+    color: rgb(112, 158, 218);;         
              
 }         
          
 .navbar-nav .nav-link.active, .navbar-nav .show > .nav-link {         
-    color: rgb(112, 205, 218)         
+    color: rgb(112, 158, 218);;         
+}
+
+.navbar-toggler-icon {
+    background-color: rgb(112, 158, 218)
 }

@@ -1,5 +1,6 @@
 .homeDesign {
     display: flex;
+    justify-content: center;
 
     height: 78vh;
     width: 100vw;
@@ -7,6 +8,8 @@
 }
 
 .homeImgDesign{
-    height:100%;
-    width:100%
+    overflow: hidden;
+    height:auto;
+    width:85%;
+    min-width: 00px
 }

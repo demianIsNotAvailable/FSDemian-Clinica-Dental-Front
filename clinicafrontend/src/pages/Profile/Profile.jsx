@@ -1,16 +1,50 @@
-const datosPerfilUser = {}
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { userData } from "../userSlice";
+import { profileCall } from "../../services/apiCalls";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./Profile.css";
 
 export const Profile = () => {
+  const navigate = useNavigate();
+  const userReduxData = useSelector(userData);
+  const [profileData, setProfileData] = useState({});
 
-    return (
+  useEffect(() => {
+    if (!userReduxData.credentials.token) {
+      navigate("/");
+    }
+  }, []);
 
-        <div className="profileDesign">
-      {datosPerfilUser.id !== "" ? (
-        <div>{datosPerfilUser.name}</div>
-      ) : (
-        <div>Loading</div>
-      )}
+  useEffect(() => {
+    profileCall(
+      userReduxData.credentials.user.id,
+      userReduxData.credentials.token
+    )
+      .then((results) => {
+        setProfileData(results.data);
+      })
+      .catch((error) => console.log(error));
+  }, [profileData]);
+
+  return (
+    <div className="profileDesign">
+      <div className="profileContainerDesign">
+        <h1>User details:</h1>
+        {profileData.name !== "" ? (
+          <div className="profileContainerDeisgn2">
+            <div>Name: {profileData.name}</div>
+            <div>Lastname: {profileData.lastname}</div>
+            <div>Email: {profileData.email}</div>
+            <div>Phone number: {profileData.phone}</div>
+          </div>
+        ) : (
+          <div>CARGANDO</div>
+        )}
+      </div>
     </div>
   );
 };
-    

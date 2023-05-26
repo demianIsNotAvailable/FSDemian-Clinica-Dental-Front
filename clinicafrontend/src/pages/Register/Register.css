@@ -1,14 +1,14 @@
 .registerDesign {
     display: flex;
+    justify-content: center;
+    align-items: center;
 
     height: 78vh;
     width: 100vw;
 
-    background-color: teal;
+    background-color:rgb(112, 158, 218);
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
 }
 
 

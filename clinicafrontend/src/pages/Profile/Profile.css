@@ -1,10 +1,51 @@
-.profileDesign {
+.profileDesign{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
     height: 78vh;
     width: 100vw;
 
-    background-color: rgb(220, 220, 220);
+    background-color: white;
+
+    
+}
+
+.profileContainerDesign{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(59, 143, 227);
+    height: 25em;
+
+    width: 15em;
+    margin: 1em;
+    font-size: 2em;
+    border-radius: 10%;
+    color: white;
+    font-weight: bold;
+   
+    
+}
+.profileContainerDesign2{
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: rgb(59, 143, 227);
+    height: 25em;
+
+    width: 15em;
+    margin: 1em;
+    font-size: 2em;
+    border-radius: 10%;
+    color: white;
+    font-weight: bold;
+   
+    
 }

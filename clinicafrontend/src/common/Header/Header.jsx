@@ -1,3 +1,7 @@
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, userData } from "../../pages/userSlice";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,6 +12,17 @@ import "./Header.css";
 const tokenRedux = "";
 const rolRedux = "";
 export const Header = () => {
+
+  const dispatch = useDispatch();
+  const datosUserRedux = useSelector(userData);
+  const navigate = useNavigate()
+
+  const logMeOut = () => {
+    dispatch(logout({ credentials: {}}));
+       navigate("/")
+  }
+
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="navBar">
       <Container>
@@ -21,18 +36,17 @@ export const Header = () => {
             <Nav.Link href="about">About us</Nav.Link>
           </Nav>
           <Nav>
-            {!tokenRedux ? (
+            {!datosUserRedux.credentials.token ? (
               <>
                 <NavDropdown title="Account" id="collasible-nav-dropdown">
                   <NavDropdown.Item href="login">Login</NavDropdown.Item>
                   <NavDropdown.Item href="register">Register</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="admin">ADMIN</NavDropdown.Item>
                 </NavDropdown>
               </>
             ) : (
               <>
-                {rolRedux === "admin" ? (
+                {datosUserRedux.credentials.role === "ADMIN" ? (
                   <NavDropdown title="Account" id="collasible-nav-dropdown">
                     <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
                     <NavDropdown.Item href="logout">Logout</NavDropdown.Item>
@@ -42,9 +56,9 @@ export const Header = () => {
                 ) :                 
                <NavDropdown title="Account" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="logout">Logout</NavDropdown.Item>
-                <NavDropdown.Divider />
                 <NavDropdown.Item href="appointments">Appointments</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="logout" onClick={()=>logMeOut()}>Logout</NavDropdown.Item>
               </NavDropdown>
               }
               </>

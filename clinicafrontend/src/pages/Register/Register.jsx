@@ -2,16 +2,15 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { loginCall, registerCall } from "../../services/apiCalls";
-import { login, userData } from "../userSlice";
+import { useSelector } from "react-redux";
+import { registerCall } from "../../services/apiCalls";
+import { userData } from "../userSlice";
 import "./Register.css";
 
 
 export const Register = () => {
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const userReduxData = useSelector(userData)
 
   useEffect(()=>{
@@ -40,13 +39,10 @@ export const Register = () => {
 
   const registerHandler = () => {
     registerCall(data)
-      .then((res) => {
-        const credentials = {
-          email: data.email,
-          password: data.password
-        }
-        loginCall(credentials)
-
+      .then(() => {
+        setTimeout(() => {
+        navigate("/login")
+      }, 1000)
       })
       .catch((error) => console.log(error));
   };
@@ -119,7 +115,7 @@ export const Register = () => {
 
         </InputGroup>
         <button className="registerButtonDesign" onClick={registerHandler}>
-            Log me in!
+            Sign me up!
           </button>
       </div>
     </div>

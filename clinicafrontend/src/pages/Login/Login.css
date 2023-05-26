@@ -11,11 +11,20 @@
     align-items: center;
 }
 
-.loginDesignInner {
+.loginFormContainer {
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: absolute;
+
+    height: 30em;
+    width: 20em;
+    background-color: azure;
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: rgb(112, 205, 218);
+    border-radius: 15%
 }
 
 .loginButtonDesign {
@@ -27,7 +36,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: darkcyan;
+    background-color: rgb(112, 158, 218);;
 
     border-radius: 0.5em;
     transition: 0.3s;
@@ -35,6 +44,7 @@
     font-weight: bold;
 
     cursor: pointer;
+    margin: 3em
 }
 
 .loginButtonDesign:hover {
