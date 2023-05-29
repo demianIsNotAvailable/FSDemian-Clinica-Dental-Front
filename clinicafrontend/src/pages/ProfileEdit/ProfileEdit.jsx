@@ -3,27 +3,24 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { registerCall } from "../../services/apiCalls";
+import { updateUserCall } from "../../services/apiCalls";
 import { userData } from "../userSlice";
-import "./Register.css";
+import "../Register/Register.css";
 
-export const Register = () => {
+export const ProfileEdit = () => {
   const navigate = useNavigate();
   const userReduxData = useSelector(userData);
 
   useEffect(() => {
-    if (userReduxData.credentials.token) {
+    if (!userReduxData.credentials.token) {
       navigate("/");
     }
   }, []);
 
   const [data, setData] = useState({
-    name: "",
-    lastname: "",
-    phone: "",
-    email: "",
+    phone: userReduxData.credentials.user.phone,
+    email: userReduxData.credentials.user.email,
     password: "",
-    role: "USER",
   });
 
   const inputHandler = (field) => {
@@ -33,42 +30,20 @@ export const Register = () => {
     }));
   };
 
-  const registerHandler = () => {
-    registerCall(data)
+  const editHandler = () => {
+    console.log(data, userReduxData.credentials.token, "patata")
+    updateUserCall(data, userReduxData.credentials.token)
       .then(() => {
         setTimeout(() => {
-          navigate("/login");
+          navigate("/profile");
         }, 1000);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.log(error));
   };
 
   return (
     <div className="registerDesign">
       <div className="registerFormContainer">
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">name</InputGroup.Text>
-          <Form.Control
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            type={"text"}
-            className={"basicInput"}
-            placeholder={""}
-            name={"name"}
-            onChange={(e) => inputHandler(e)}
-          />
-        </InputGroup>
-
-        <InputGroup className="mb-3">
-          <Form.Control
-            type={"text"}
-            className={"basicInput"}
-            placeholder={""}
-            name={"lastname"}
-            onChange={(e) => inputHandler(e)}
-          />
-          <InputGroup.Text id="basic-addon2">lastname</InputGroup.Text>
-        </InputGroup>
 
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">phone number</InputGroup.Text>
@@ -77,7 +52,7 @@ export const Register = () => {
             aria-describedby="basic-addon1"
             type={"text"}
             className={"basicInput"}
-            placeholder={""}
+            placeholder={userReduxData.credentials.user.phone}
             name={"phone"}
             onChange={(e) => inputHandler(e)}
           />
@@ -93,7 +68,7 @@ export const Register = () => {
             aria-describedby="basic-addon1"
             type={"email"}
             className={"basicInput"}
-            placeholder={""}
+            placeholder={userReduxData.credentials.user.email}
             name={"email"}
             onChange={(e) => inputHandler(e)}
           />
@@ -104,13 +79,13 @@ export const Register = () => {
           <Form.Control
             type={"password"}
             className={"basicInput"}
-            placeholder={""}
+            placeholder={"********"}
             name={"password"}
             onChange={(e) => inputHandler(e)}
           />
         </InputGroup>
-        <button className="registerButtonDesign" onClick={registerHandler}>
-          Sign me up!
+        <button className="registerButtonDesign" onClick={editHandler}>
+          Update
         </button>
       </div>
     </div>

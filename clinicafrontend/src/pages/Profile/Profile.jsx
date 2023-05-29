@@ -20,16 +20,13 @@ export const Profile = () => {
   }, []);
 
   useEffect(() => {
-    profileCall(
-      userReduxData.credentials.user.id,
-      userReduxData.credentials.token
-    )
-      .then((results) => {
-        setProfileData(results.data);
+    profileCall(userReduxData.credentials)
+      .then((res) => {
+        setProfileData(res.data);
       })
-      .catch((error) => console.log(error));
-  }, [profileData]);
-
+      .catch((error) => console.error(error));
+  }, []);
+  console.log(profileData);
   return (
     <div className="profileDesign">
       <div className="profileContainerDesign">
@@ -40,6 +37,7 @@ export const Profile = () => {
             <div>Lastname: {profileData.lastname}</div>
             <div>Email: {profileData.email}</div>
             <div>Phone number: {profileData.phone}</div>
+            <div className="loginButtonDesign">Edit</div>
           </div>
         ) : (
           <div>CARGANDO</div>
