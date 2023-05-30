@@ -32,16 +32,13 @@ export const Login = () => {
   };
 
   const loginHandler = () => {
-    console.log(credentials)
     loginCall(credentials)
       .then((res) => {
         const data = {
           token: res.data.token,
           user: jwt_decode(res.data.token),
         };
-        console.log(data)
         dispatch(login({credentials: data}))
-
         setTimeout(() => {
           navigate("/")
         }, 2000)

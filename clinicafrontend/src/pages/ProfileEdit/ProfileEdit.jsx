@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { updateUserCall } from "../../services/apiCalls";
 import { userData } from "../userSlice";
-import "../Register/Register.css";
+import "./profileEdit.css";
+import { InputText } from "../../common/InputText/InputText";
 
 export const ProfileEdit = () => {
   const navigate = useNavigate();
@@ -28,10 +29,10 @@ export const ProfileEdit = () => {
       ...prevState,
       [field.target.name]: field.target.value,
     }));
+    console.log(data)
   };
 
   const editHandler = () => {
-    console.log(data, userReduxData.credentials.token, "patata")
     updateUserCall(data, userReduxData.credentials.token)
       .then(() => {
         setTimeout(() => {
@@ -40,51 +41,29 @@ export const ProfileEdit = () => {
       })
       .catch((error) => console.log(error));
   };
-
   return (
-    <div className="registerDesign">
-      <div className="registerFormContainer">
-
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">phone number</InputGroup.Text>
-          <Form.Control
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            type={"text"}
+    <div className="profileEditDesign">
+      <div className="formContainerContainer">
+        <InputText
+            type={"phone"}
             className={"basicInput"}
-            placeholder={userReduxData.credentials.user.phone}
             name={"phone"}
-            onChange={(e) => inputHandler(e)}
-          />
-        </InputGroup>
-        <Form.Label htmlFor="basic-url">
-          These will be your login credentials:
-        </Form.Label>
+            handler={(e) => inputHandler(e)}
+        />
 
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
-          <Form.Control
-            aria-label="Username"
-            aria-describedby="basic-addon1"
+        <InputText
             type={"email"}
             className={"basicInput"}
-            placeholder={userReduxData.credentials.user.email}
             name={"email"}
-            onChange={(e) => inputHandler(e)}
-          />
-        </InputGroup>
-
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">password</InputGroup.Text>
-          <Form.Control
+            handler={(e) => inputHandler(e)}
+        />
+        <InputText
             type={"password"}
             className={"basicInput"}
-            placeholder={"********"}
             name={"password"}
-            onChange={(e) => inputHandler(e)}
-          />
-        </InputGroup>
-        <button className="registerButtonDesign" onClick={editHandler}>
+            handler={(e) => inputHandler(e)}
+        />
+        <button className="formContainerButtonDesign" onClick={editHandler}>
           Update
         </button>
       </div>

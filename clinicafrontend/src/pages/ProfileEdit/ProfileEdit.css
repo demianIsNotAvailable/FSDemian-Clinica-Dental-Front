@@ -1,0 +1,12 @@
+.profileEditDesign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 78vh;
+    width: 80vw;
+
+    background-color:rgb(112, 158, 218);
+
+
+}

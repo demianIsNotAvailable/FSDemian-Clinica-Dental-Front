@@ -5,9 +5,8 @@ export const InputText = ({type, className, placeholder, name, handler}) => {
 
     return (
         <div >
-            <input id='inputTextDesign'
+            <input className='inputTextDesign'
                 type={type}
-                className={className} 
                 placeholder={type}
                 name={name}
                 onChange={(e)=>handler(e)}

@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Profile.css";
-
+import '../../common/FormContainer/FormContainer.css'
 export const Profile = () => {
   const navigate = useNavigate();
   const userReduxData = useSelector(userData);
@@ -26,23 +26,28 @@ export const Profile = () => {
       })
       .catch((error) => console.error(error));
   }, []);
-  console.log(profileData);
   return (
     <div className="profileDesign">
-      <div className="profileContainerDesign">
-        <h1>User details:</h1>
         {profileData.name !== "" ? (
-          <div className="profileContainerDeisgn2">
-            <div>Name: {profileData.name}</div>
-            <div>Lastname: {profileData.lastname}</div>
-            <div>Email: {profileData.email}</div>
-            <div>Phone number: {profileData.phone}</div>
-            <div className="loginButtonDesign">Edit</div>
+          <div className="formContainerContainer">
+            <h1>Your info:</h1>
+            <br></br>
+            <h6>Name</h6>
+            <h4>{profileData.name}</h4>
+            <h6>Lastname</h6>
+            <h4>{profileData.lastname}</h4>
+            <h6>Email</h6>
+            <h4>{profileData.email}</h4>
+            <h6>Phone</h6>
+            <h4>{profileData.phone}</h4>
+            <button className="formContainerButtonDesign" onClick={() => navigate("/profileedit")}
+            >
+              Edit
+            </button>
           </div>
         ) : (
           <div>CARGANDO</div>
         )}
-      </div>
     </div>
-  );
+  ); 
 };
