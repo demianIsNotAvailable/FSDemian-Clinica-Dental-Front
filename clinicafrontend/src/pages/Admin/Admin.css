@@ -90,6 +90,21 @@
     cursor: pointer;
 }
 
+.confirmButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 60px;
+    background-color: white;
+    border-style:solid;
+    border-color: black;
+    border-radius: 50%;
+    color: limegreen;
+    font-weight: bold;
+    cursor:pointer;
+    user-select: none;
+}
 
 @media (max-width: 549px) {
     .adminDesign {

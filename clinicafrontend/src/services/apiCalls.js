@@ -5,6 +5,7 @@ export const loginUser = async (credentials) => {
 };
 
 export const registerUser = async (data) => {
+  console.log(data)
   await axios.post(`http://localhost:27017/user/`, data);
 };
 
@@ -45,15 +46,16 @@ export const updateUserData = async (data, token) => {
       Authorization: "Bearer " + token,
     },
   };
-  const body = (({id, email, phone, password }) => ({
+  const body = (({id, name, lastname, email, phone, role }) => ({
     id,
+    name,
+    lastname,
     email,
     phone,
-    password,
+    role
   }))(data);
-  console.log(data)
-  console.log(body)
-  console.log( await axios.put(`http://localhost:27017/user/`, body, config));
+
+  return ( await axios.put(`http://localhost:27017/user/`, body, config));
 };
 
 export const bringAppointments = async (token) => {

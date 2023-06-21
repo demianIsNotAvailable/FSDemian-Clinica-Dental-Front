@@ -10,3 +10,21 @@
 #appButton {
     width:8em;
 }
+
+.appointmentContainerDesign {
+    height: 50vh;
+    width: 50vw;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    background-color: azure;
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: rgb(112, 205, 218);
+    overflow: auto
+}
+
+.appButtonContainer {
+    display:flex;
+    width: 40vw
+}

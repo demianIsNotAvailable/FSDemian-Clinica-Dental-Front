@@ -31,8 +31,11 @@ export const Appointments = () => {
       .catch((error) => console.error(error));
   }, []);
 
+
+
   return (
     <div className="appointmentsDesign">
+     <h1>Your Appoinments</h1>
       <div className="appointmentContainerDesign">
         <>
           {appointmentList.map((app) => (
@@ -46,7 +49,9 @@ export const Appointments = () => {
           ))}
         </>
       </div>
+      <div className="appButtonContainer">
       <button className="formContainerButtonDesign" id="appButton" onClick={() => navigate("/profileedit")}>New <br></br> Appointment</button>
+      </div>
     </div>
   );
 };

@@ -3,19 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import "./Admin.css";
-import { bringUsersByRole, findUsers } from "../../services/apiCalls";
-import { editData, toedit } from "../editSlice";
-import { Button, Modal, Form } from "react-bootstrap";
+import { bringUsersByRole, findUsers, updateUserData } from "../../services/apiCalls";
+import { toedit } from "../editSlice";
+import { Form } from "react-bootstrap";
 
 
 export const Admin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const adminReduxData = useSelector(userData);
-  const checkedit = useSelector(editData)
   const [users, setUsers] = useState([]);
   const [finder, setFinder] = useState("");
   const [userDetail, setUserDetail] = useState({})
+  const [updateRole, setUpdateRole] = useState("")
 
   const inputHandler = (e) => {
     setFinder(e.target.value);
@@ -42,14 +42,27 @@ export const Admin = () => {
   }, [finder]);
 
 
+  useEffect(()=> {
+    if (updateRole !== "") {
+      userDetail.role = updateRole
+      updateUserData(userDetail, adminReduxData.credentials.token)
+      
+    }
+  }, [updateRole])
+
+
 
   const bringUsersHandler = (role) => {
     bringUsersByRole(adminReduxData.credentials.token, role)
       .then((res) => {
         setUsers(res.data);
       })
+      .then(() => {
+        setUserDetail({})
+      })
       .catch((err) => console.error(err));
   };
+
 
 
   const detailHandler = (user) => {
@@ -69,6 +82,8 @@ export const Admin = () => {
       email: userData.email,
       phone: userData.phone
     }
+
+
     
     dispatch(toedit({data: editData}))
 
@@ -118,15 +133,12 @@ export const Admin = () => {
                 <div className="userDataContainer">lastname: {userDetail.lastname}</div>
                 <div className="userDataContainer">email: {userDetail.lastname}</div>
                 <div className="userDataContainer">phone: {userDetail.phone}</div>
-                <Form.Group>
-                  <Form.Select name={"role"} onChange={(e) => inputHandler(e)}>
-                    <option value="SZ">SZ</option>
-                    <option value="48">48</option>
-                    <option value="Rojo">Rojo</option>
-                    <option value="La Purga">La Purga</option>
-                    <option value="Cazadores de Demonios">CdD</option>
-                    <option value="Juegos del Calamar">Calamar</option>
-                    <option value="Otro">Otro</option>
+                <div className="userDataContainer">role: {userDetail.role}</div>
+                <Form.Group style={{ display: 'flex', alignItems: 'center' }}>
+                  <Form.Select name={"role"} style={{ margin: '10px' }} defaultValue={userDetail.role} onChange={(e) => setUpdateRole(e.target.value)}>
+                    <option value="USER">user</option>
+                    <option value="DOCTOR">doctor</option>
+                    <option value="ADMIN">admin</option>
                   </Form.Select>
                 </Form.Group>
                 <button className="formContainerButtonDesign" onClick={() => editHandler(userDetail)}>Edit User</button>

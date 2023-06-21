@@ -21,19 +21,7 @@ h4 {
     
 }
 
-.appointmentContainerDesign {
-    height: 50vh;
-    width: 50vw;
-    display: grid;
-    grid-template-columns: 50% 50%;
 
-    background-color: azure;
-    border-width: 0.5em;
-    border-style: solid;
-    border-color: rgb(112, 205, 218);
-    border-radius: 5%;
-    overflow: auto
-}
 
 @media only screen and (max-width: 800px) {
     .profileDesign {
