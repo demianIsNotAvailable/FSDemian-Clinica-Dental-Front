@@ -1,0 +1,12 @@
+.appointmentsDesign{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+#appButton {
+    width:8em;
+}

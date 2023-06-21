@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../userSlice";
 import { bringAppointments, bringUser } from "../../services/apiCalls";
-import "./Profile.css";
 import '../../common/FormContainer/FormContainer.css'
+import "./Profile.css";
+
 import {AppointmentCard} from "../../common/AppointmentCard/AppointmentCard"
 import { formatDate } from "../../services/functions";
 export const Profile = () => {

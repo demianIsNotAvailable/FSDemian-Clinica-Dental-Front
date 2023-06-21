@@ -6,7 +6,7 @@ import './AppointmentCard.css';
 export const AppointmentCard = ({client, doctor, date, time}) => {
 
     return (
-      <Card className="appointmentCardDesign" style={{ width: "18rem" }}>
+      <Card className="appointmentCardDesign" style={{ width: "18em" }}>
 
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Client: {client}</ListGroup.Item>
