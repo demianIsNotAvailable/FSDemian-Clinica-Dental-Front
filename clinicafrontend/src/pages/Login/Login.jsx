@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { login, userData } from "../userSlice";
-import { loginCall } from "../../services/apiCalls";
+import { loginUser } from "../../services/apiCalls";
 import "./Login.css";
 
 export const Login = () => {
@@ -28,23 +28,25 @@ export const Login = () => {
       ...prevState,
       [field.target.name]: field.target.value,
     }));
-    console.log(credentials);
   };
 
   const loginHandler = () => {
-    loginCall(credentials)
+    loginUser(credentials)
       .then((res) => {
-        const data = {
+        const decodedToken = jwt_decode(res.data.token)
+        const token = {
           token: res.data.token,
-          user: jwt_decode(res.data.token),
-        };
-        dispatch(login({credentials: data}))
+          id : decodedToken.id,
+          email: decodedToken.email,
+          role: decodedToken.role,
+          phone: decodedToken.phone
+        }
+        dispatch(login({credentials: token}))
         setTimeout(() => {
           navigate("/")
         }, 2000)
       })
       .catch((error) => {
-        console.log("error")
         throw new Error(error)});
   };
 
@@ -66,9 +68,7 @@ export const Login = () => {
           name={"password"}
           handler={inputHandler}
         />
-        <button className="loginButtonDesign" onClick={loginHandler}>
-          Log me in!
-        </button>
+        <button className="loginButtonDesign" onClick={loginHandler}>Log me in!</button>
       </div>
     </div>
   );

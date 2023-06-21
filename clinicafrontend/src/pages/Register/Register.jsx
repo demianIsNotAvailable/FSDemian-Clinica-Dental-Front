@@ -3,7 +3,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { registerCall } from "../../services/apiCalls";
+import { registerUser } from "../../services/apiCalls";
 import { userData } from "../userSlice";
 import "./Register.css";
 
@@ -34,7 +34,7 @@ export const Register = () => {
   };
 
   const registerHandler = () => {
-    registerCall(data)
+    registerUser(data)
       .then(() => {
         setTimeout(() => {
           navigate("/login");

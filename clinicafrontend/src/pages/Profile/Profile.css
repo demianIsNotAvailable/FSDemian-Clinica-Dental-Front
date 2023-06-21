@@ -1,8 +1,8 @@
 .profileDesign{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center ;
    
     height: 78vh;
     width: 100vw;
@@ -19,4 +19,16 @@ h4 {
     border-width: 0.1em;
     border-color: rgba(102, 102, 102, 0.75)
     
+}
+
+.appointmentContainerDesign {
+    height: 50vh;
+    width: 50vw;
+    display: grid;
+
+    background-color: azure;
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: rgb(112, 205, 218);
+    border-radius: 5%;
 }

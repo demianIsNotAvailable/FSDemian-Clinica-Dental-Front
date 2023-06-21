@@ -3,14 +3,17 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { updateUserCall } from "../../services/apiCalls";
+import { updateUserData } from "../../services/apiCalls";
 import { userData } from "../userSlice";
+import { editData } from "../editSlice";
 import "./profileEdit.css";
 import { InputText } from "../../common/InputText/InputText";
 
 export const ProfileEdit = () => {
   const navigate = useNavigate();
   const userReduxData = useSelector(userData);
+  const editReduxData = useSelector(editData)
+
 
   useEffect(() => {
     if (!userReduxData.credentials.token) {
@@ -18,22 +21,40 @@ export const ProfileEdit = () => {
     }
   }, []);
 
+
   const [data, setData] = useState({
-    phone: userReduxData.credentials.user.phone,
-    email: userReduxData.credentials.user.email,
+    id: userReduxData.credentials.id,
+    phone: userReduxData.credentials.phone,
+    email: userReduxData.credentials.email,
     password: "",
   });
 
+  const [toEditData, setToEditData] = useState({
+    id: editReduxData.data.id,
+    phone: editReduxData.data.phone,
+    email: editReduxData.data.email,
+  })
+
   const inputHandler = (field) => {
-    setData((prevState) => ({
-      ...prevState,
-      [field.target.name]: field.target.value,
-    }));
-    console.log(data)
+    if (editReduxData.data.id) {
+      setToEditData((prevState) => ({
+        ...prevState,
+        [field.target.name]: field.target.value,
+      }))
+      console.log(toEditData)
+      console.log(userReduxData.credentials.id)
+
+    }
+    else {setData((prevState) => ({
+        ...prevState,
+        [field.target.name]: field.target.value,
+      }));
+      console.log(data)
+    }
   };
 
   const editHandler = () => {
-    updateUserCall(data, userReduxData.credentials.token)
+    updateUserData(data, userReduxData.credentials.token)
       .then(() => {
         setTimeout(() => {
           navigate("/profile");
@@ -45,14 +66,14 @@ export const ProfileEdit = () => {
     <div className="profileEditDesign">
       <div className="formContainerContainer">
         <InputText
-            type={"phone"}
+            type={"new phone"}
             className={"basicInput"}
             name={"phone"}
             handler={(e) => inputHandler(e)}
         />
 
         <InputText
-            type={"email"}
+            type={"new email"}
             className={"basicInput"}
             name={"email"}
             handler={(e) => inputHandler(e)}

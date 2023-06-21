@@ -9,8 +9,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.css";
 
-const tokenRedux = "";
-const rolRedux = "";
+
 export const Header = () => {
 
   const dispatch = useDispatch();
@@ -19,7 +18,6 @@ export const Header = () => {
 
   const logMeOut = () => {
     dispatch(logout({ credentials: {}}));
-       navigate("/")
   }
 
 
@@ -36,7 +34,8 @@ export const Header = () => {
             <Nav.Link href="about">About us</Nav.Link>
           </Nav>
           <Nav>
-            {!datosUserRedux.credentials.token ? (
+            {!datosUserRedux.credentials.token 
+            ? (
               <>
                 <NavDropdown title="Account" id="collasible-nav-dropdown">
                   <NavDropdown.Item href="login">Login</NavDropdown.Item>
@@ -46,15 +45,16 @@ export const Header = () => {
               </>
             ) : (
               <>
-                {datosUserRedux.credentials.role === "ADMIN" ? (
-                  <NavDropdown title="Account" id="collasible-nav-dropdown">
+                {datosUserRedux.credentials.role === "ADMIN" 
+                ? (
+                  <NavDropdown title="Admin" id="collasible-nav-dropdown">
                     <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
-                    <NavDropdown.Item href="logout">Logout</NavDropdown.Item>
-                    <NavDropdown.Divider />
                     <NavDropdown.Item href="ADMIN">ADMIN</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="logout" onClick={()=>logMeOut()}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 ) :                 
-               <NavDropdown title="Account" id="collasible-nav-dropdown">
+               <NavDropdown title={datosUserRedux.credentials.email} id="collasible-nav-dropdown">
                 <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="appointments">Appointments</NavDropdown.Item>
                 <NavDropdown.Divider />

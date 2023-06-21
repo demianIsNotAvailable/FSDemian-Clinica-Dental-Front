@@ -16,7 +16,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
 
     height: 30em;
     width: 20em;
@@ -24,7 +23,8 @@
     border-width: 0.5em;
     border-style: solid;
     border-color: rgb(112, 205, 218);
-    border-radius: 15%
+    border-radius: 15%;
+    margin: 1em
 }
 
 .formContainerButtonDesign {
