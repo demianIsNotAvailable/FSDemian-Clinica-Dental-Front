@@ -3,7 +3,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import React from 'react';
 import './AppointmentCard.css';
 
-export const AppointmentCard = ({client, doctor, date, time}) => {
+export const AppointmentCard = ({client, doctor, date, time, editHandler, deleteHandler}) => {
 
     return (
       <Card className="appointmentCardDesign" style={{ width: "18em" }}>
@@ -15,9 +15,8 @@ export const AppointmentCard = ({client, doctor, date, time}) => {
         <ListGroup.Item>Time: {time}</ListGroup.Item>
       </ListGroup>
         <Card.Body>
-          <Card.Link href="#">Details</Card.Link><br></br>
-          <Card.Link href="#">Edit</Card.Link><br></br>
-          <Card.Link href="#">Cancel</Card.Link>
+          <Card.Link href="#" onClick={editHandler}>Edit</Card.Link><br></br>
+          <Card.Link href="#" onClick={deleteHandler}>Cancel</Card.Link>
         </Card.Body>
     </Card>
     )

@@ -5,11 +5,13 @@ import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import userSlice from '../pages/userSlice';
 import editSlice from '../pages/editSlice';
+import appointmentSlice from '../pages/appointmentSlice';
 
 
 const reducers = combineReducers({
     edit: editSlice,
-    user: userSlice
+    user: userSlice,
+    appointment: appointmentSlice
 })
 
 const persistConfig = {

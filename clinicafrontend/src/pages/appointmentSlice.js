@@ -27,6 +27,6 @@ export const appointmentSlice = createSlice({
 export const { addAppointment, removeAppointment } = appointmentSlice.actions;
 
 
-export const appointmentData = (state) => state.detail;
+export const appointmentData = (state) => state.appointment;
 
 export default appointmentSlice.reducer;

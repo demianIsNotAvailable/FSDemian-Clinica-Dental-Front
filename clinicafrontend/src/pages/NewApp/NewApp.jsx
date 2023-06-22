@@ -1,15 +1,17 @@
 import Form from "react-bootstrap/Form";
-import { bringUsersByRole, createAppointment } from "../../services/apiCalls";
+import { bringUsersByRole, sendAppointment } from "../../services/apiCalls";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { convertAppointment } from "../../services/functions";
+import { appointmentData } from "../appointmentSlice";
 import "./NewApp.css";
 
 export const NewApp = () => {
   const navigate = useNavigate();
   const userReduxData = useSelector(userData);
+  const appReduxData = useSelector(appointmentData)  
   const [doctors, setDoctors] = useState([]);
   const [clients, setClients] = useState ([])
   const [data, setData] = useState({
@@ -21,6 +23,16 @@ export const NewApp = () => {
       navigate("/");
     }
   }, []);
+
+  useEffect(() => {
+    if (appReduxData.data) {
+        setData(appReduxData.data)
+    }
+}, [])
+
+
+console.log(data)
+
 
   useEffect(() => {
     if (doctors.length === 0) {
@@ -50,8 +62,8 @@ export const NewApp = () => {
 
   const sendNewApp = () => {
     const submit = convertAppointment(data)
-    console.log(submit)
-    createAppointment(submit, userReduxData.credentials.token)
+    console.log(submit, "soy sub")
+    sendAppointment(submit, userReduxData.credentials.token)
     .then(() => {
         navigate("/appointments")
     })

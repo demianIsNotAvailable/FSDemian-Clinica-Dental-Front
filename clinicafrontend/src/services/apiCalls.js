@@ -59,13 +59,15 @@ export const updateUserData = async (data, token) => {
 };
 
 
-export const createAppointment = async (data, token) => {
+export const sendAppointment = async (data, token) => {
   const config = {
     headers: {
       Authorization: "Bearer " + token,
     },
   };
-  
+  console.log(data, "soy el data a enviar")
+  if (data.id)   return await axios.patch(`http://localhost:27017/appointments`, data, config)
+
   return await axios.post(`http://localhost:27017/appointments`, data, config)
 }
 

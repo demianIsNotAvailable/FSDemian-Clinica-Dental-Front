@@ -33,6 +33,7 @@
 @media only screen and (max-width: 800px) {
     .appointmentContainerDesign{
         display:flex;
+        height: 60vh;
         width: 95vw
     }
 }

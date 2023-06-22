@@ -81,10 +81,7 @@ export const Admin = () => {
       id: userData.id,
       email: userData.email,
       phone: userData.phone
-    }
-
-
-    
+    }    
     dispatch(toedit({data: editData}))
 
     setTimeout(() => {

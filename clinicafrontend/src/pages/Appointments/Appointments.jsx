@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../userSlice";
 import { AppointmentCard } from "../../common/AppointmentCard/AppointmentCard";
+import { addAppointment } from "../appointmentSlice";
 import { formatDate } from "../../services/functions";
 import { bringAppointments } from "../../services/apiCalls";
 import "./Appointments.css"
 
 export const Appointments = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const userReduxData = useSelector(userData);
   const [appointmentList, setAppointmentList] = useState([]);
 
@@ -32,6 +34,19 @@ export const Appointments = () => {
   }, []);
 
 
+  const editHandler = (appData) => {
+    const thisAppData = {
+      id: appData._id,
+      client: appData.client._id,
+      doctor: appData.doctor._id,
+      date: appData.date,
+      time: appData.time
+    }
+    console.log(thisAppData, "this is dispatch")
+    dispatch(addAppointment({data: thisAppData}))
+    navigate("/newapp")
+  }
+
 
   return (
     <div className="appointmentsDesign">
@@ -45,6 +60,7 @@ export const Appointments = () => {
               doctor={app.doctor.lastname}
               date={app.date}
               time={app.time}
+              editHandler={() => editHandler(app)}
             />
           ))}
         </>

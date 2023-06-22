@@ -24,7 +24,16 @@ export const formatDate = (isoString) => {
   
     const startISO = start.toISOString();
     const endISO = end.toISOString();
-  
+    if (appointment.id){
+      return {
+        id: appointment.id,
+        client: appointment.client,
+        doctor: appointment.doctor,
+        start: startISO,
+        end: endISO,
+      };
+    }
+
     return {
       client: appointment.client,
       doctor: appointment.doctor,
