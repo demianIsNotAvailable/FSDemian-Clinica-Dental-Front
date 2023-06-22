@@ -19,7 +19,7 @@ export const Appointments = () => {
   }, []);
 
   useEffect(() => {
-    bringAppointments(userReduxData.credentials)
+    bringAppointments(userReduxData.credentials.token)
       .then((res) => {
         res.data.forEach((appointment) => {
           appointment.date = formatDate(appointment.start).date;
@@ -35,7 +35,7 @@ export const Appointments = () => {
 
   return (
     <div className="appointmentsDesign">
-     <h1>Your Appoinments</h1>
+     <h1>Appoinments</h1>
       <div className="appointmentContainerDesign">
         <>
           {appointmentList.map((app) => (

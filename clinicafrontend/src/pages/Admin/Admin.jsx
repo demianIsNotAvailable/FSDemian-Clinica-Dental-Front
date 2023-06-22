@@ -105,6 +105,7 @@ export const Admin = () => {
           <button className="formContainerButtonDesign" onClick={() => bringUsersHandler("user")}>User List</button>
           <button className="formContainerButtonDesign" onClick={() => bringUsersHandler("doctor")}>Doctor List</button>
           <button className="formContainerButtonDesign" onClick={() => bringUsersHandler("admin")}>Admin List</button>
+          <button className="formContainerButtonDesign" id="appButton" onClick={() => navigate("/appointments")}>Appointments</button> 
         </div>
       </div>
 
