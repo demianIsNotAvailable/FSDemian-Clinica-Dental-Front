@@ -50,7 +50,7 @@ export const Appointments = () => {
         </>
       </div>
       <div className="appButtonContainer">
-      <button className="formContainerButtonDesign" id="appButton" onClick={() => navigate("/profileedit")}>New <br></br> Appointment</button>
+      <button className="formContainerButtonDesign" id="appButton" onClick={() => navigate("/newapp")}>New <br></br> Appointment</button>
       </div>
     </div>
   );

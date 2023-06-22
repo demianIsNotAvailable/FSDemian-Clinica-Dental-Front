@@ -8,6 +8,8 @@ import { Profile } from "../Profile/Profile";
 import { Admin } from "../Admin/Admin";
 import { Appointments } from "../Appointments/Appointments";
 import { ProfileEdit } from "../ProfileEdit/ProfileEdit";
+import { NewApp } from "../NewApp/NewApp";
+
 
 export const Body = () => {
 
@@ -24,6 +26,7 @@ export const Body = () => {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/appointments" element ={<Appointments />} />
                 <Route path="/profileedit" element ={<ProfileEdit />} />
+                <Route path="/newapp" element ={<NewApp />} />
             </Routes>
         
         

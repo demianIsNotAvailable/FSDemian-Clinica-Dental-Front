@@ -1,0 +1,26 @@
+.newAppDesign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 78vh;
+    width: 80vw;
+
+    background-color:rgb(112, 158, 218);
+
+
+}
+
+
+.newAppFormContainer {
+    display:flex;
+    flex-direction: column;
+
+}
+
+
+@media only screen and (max-width: 800px) {
+    .newAppDesign{
+        width: 100vw;
+    }
+}

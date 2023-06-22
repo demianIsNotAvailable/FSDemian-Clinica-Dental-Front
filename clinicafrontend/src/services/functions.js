@@ -1,3 +1,6 @@
+import moment from "moment/moment";
+
+
 export const formatDate = (isoString) => {
     const date = new Date(isoString);
     
@@ -13,3 +16,19 @@ export const formatDate = (isoString) => {
       time: `${hours}:${minutes}`
     };
   }
+
+
+  export const convertAppointment = (appointment) => {
+    const start = moment(`${appointment.date} ${appointment.time}`, "YYYY-MM-DD HH:mm");
+    const end = moment(start).add(appointment.duration, 'minutes');
+  
+    const startISO = start.toISOString();
+    const endISO = end.toISOString();
+  
+    return {
+      client: appointment.client,
+      doctor: appointment.doctor,
+      start: startISO,
+      end: endISO,
+    };
+  };

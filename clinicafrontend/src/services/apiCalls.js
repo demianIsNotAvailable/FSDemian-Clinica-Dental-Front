@@ -58,6 +58,17 @@ export const updateUserData = async (data, token) => {
   return ( await axios.put(`http://localhost:27017/user/`, body, config));
 };
 
+
+export const createAppointment = async (data, token) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+  
+  return await axios.post(`http://localhost:27017/appointments`, data, config)
+}
+
 export const bringAppointments = async (token) => {
   const config = {
     headers: {
