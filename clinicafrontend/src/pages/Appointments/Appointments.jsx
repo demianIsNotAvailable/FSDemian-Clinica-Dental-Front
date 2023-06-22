@@ -5,7 +5,7 @@ import { userData } from "../userSlice";
 import { AppointmentCard } from "../../common/AppointmentCard/AppointmentCard";
 import { addAppointment } from "../appointmentSlice";
 import { formatDate } from "../../services/functions";
-import { bringAppointments } from "../../services/apiCalls";
+import { bringAppointments, sendAppointment } from "../../services/apiCalls";
 import "./Appointments.css"
 
 export const Appointments = () => {
@@ -48,6 +48,15 @@ export const Appointments = () => {
   }
 
 
+  const deleteHandler = (id) => {
+    sendAppointment({
+      id: id,
+      active: false
+    }, userReduxData.credentials.token)
+
+  }
+
+
   return (
     <div className="appointmentsDesign">
      <h1>Appoinments</h1>
@@ -61,6 +70,7 @@ export const Appointments = () => {
               date={app.date}
               time={app.time}
               editHandler={() => editHandler(app)}
+              deleteHandler={() => deleteHandler(app._id)}
             />
           ))}
         </>
